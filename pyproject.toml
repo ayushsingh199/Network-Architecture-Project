@@ -1,0 +1,45 @@
+[project]
+name = "bhp"
+version = "1.0.0"
+description = "BHP/1: HTTP-style requests in binary frames — bserve (server) and bcurl (client)"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.6", "mypy>=1.10"]
+
+[project.scripts]
+bserve = "bhp.server:main"
+bcurl = "bhp.client:main"
+bconform = "bhp.conformance:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["bhp"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+extend-include = ["bserve", "bcurl", "bconform"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "SIM", "N", "RUF", "PL"]
+ignore = ["PLR2004", "PLR0913", "PLR0911", "RUF001"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["PLR2004", "S101"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+files = ["bhp", "tests"]
+
+[[tool.mypy.overrides]]
+module = "tests.*"
+disallow_untyped_defs = false
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

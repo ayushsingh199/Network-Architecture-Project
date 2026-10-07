@@ -1,0 +1,25 @@
+name: ci
+on: [push, pull_request]
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ["3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: pip install -e '.[dev]'
+      - run: ruff format --check .
+      - run: ruff check .
+      - run: mypy
+      - run: pytest -q
+      - name: end-to-end over the real executables
+        run: |
+          ./bserve ./www 9000 -q &
+          sleep 1
+          ./bcurl -v localhost:9000/index.html /about.html > /dev/null
+          ./bconform localhost:9000/index.html
+          if ./bcurl localhost:9000/missing; then exit 1; fi

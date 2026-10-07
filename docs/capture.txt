@@ -1,0 +1,28 @@
+> REQUEST stream=1 flags=END_STREAM length=51
+>   GET /hello.txt
+>   host: localhost:9000
+>   user-agent: bcurl/1.0.0
+>   accept: */*
+> 0000  00 00 00 33 01 01 00 01  01 00 0a 2f 68 65 6c 6c  |...3......./hell|
+> 0010  6f 2e 74 78 74 03 01 00  0e 6c 6f 63 61 6c 68 6f  |o.txt....localho|
+> 0020  73 74 3a 39 30 30 30 02  00 0b 62 63 75 72 6c 2f  |st:9000...bcurl/|
+> 0030  31 2e 30 2e 30 03 00 03  2a 2f 2a                 |1.0.0...*/*|
+< RESPONSE stream=1 flags=- length=129
+<   200 OK
+<   server: bserve/1.0.0
+<   date: Wed, 07 Oct 2026 14:23:07 GMT
+<   content-type: text/plain; charset=utf-8
+<   content-length: 3
+<   last-modified: Wed, 07 Oct 2026 14:20:00 GMT
+<   etag: "3-6ac65510"
+< 0000  00 00 00 81 02 00 00 01  00 c8 06 06 00 0c 62 73  |..............bs|
+< 0010  65 72 76 65 2f 31 2e 30  2e 30 07 00 1d 57 65 64  |erve/1.0.0...Wed|
+< 0020  2c 20 30 37 20 4f 63 74  20 32 30 32 36 20 31 34  |, 07 Oct 2026 14|
+< 0030  3a 32 33 3a 30 37 20 47  4d 54 04 00 19 74 65 78  |:23:07 GMT...tex|
+< 0040  74 2f 70 6c 61 69 6e 3b  20 63 68 61 72 73 65 74  |t/plain; charset|
+< 0050  3d 75 74 66 2d 38 05 00  01 33 08 00 1d 57 65 64  |=utf-8...3...Wed|
+< 0060  2c 20 30 37 20 4f 63 74  20 32 30 32 36 20 31 34  |, 07 Oct 2026 14|
+< 0070  3a 32 30 3a 30 30 20 47  4d 54 0a 00 0c 22 33 2d  |:20:00 GMT..."3-|
+< 0080  36 61 63 36 35 35 31 30  22                       |6ac65510"|
+< DATA stream=1 flags=END_STREAM length=3
+< 0000  00 00 00 03 03 01 00 01  68 69 0a                 |........hi.|
